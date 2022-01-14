@@ -1,12 +1,12 @@
-using PetDelivey.WebAPI.Dal;
 using PetDelivey.WebAPI.Dal.Repositories;
 using Microsoft.AspNetCore.Builder;
+using PetDelivey.WebAPI.Dal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddCors();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSwaggerGen();
@@ -26,8 +26,14 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseCors(x => x
+.AllowAnyMethod()
+.AllowAnyHeader()
+.SetIsOriginAllowed(origin => true) // allow any origin
+.AllowCredentials());
 
 app.UseRouting();
 
