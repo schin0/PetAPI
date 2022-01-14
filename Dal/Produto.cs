@@ -1,6 +1,6 @@
-﻿using Google.Cloud.Firestore;
+﻿using PetDelivey.WebAPI.Dal.Repositories;
+using Google.Cloud.Firestore;
 using Newtonsoft.Json;
-using PetDelivey.WebAPI.Dal.Repositories;
 
 namespace PetDelivey.WebAPI.Dal
 {
@@ -13,11 +13,11 @@ namespace PetDelivey.WebAPI.Dal
         {
             string arquivoApiKey = @"petdeliveryapi-firebase-adminsdk-3ddxj-215c84fd3e.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", arquivoApiKey);
-            projectId = "nodeprojectimersao";
+            projectId = "petdeliveryapi";
             fireStoreDb = FirestoreDb.Create(projectId);
         }
 
-        public string AddProduct(Model.Produto produto)
+        public string AddProduto(Model.Produto produto)
         {
             try
             {
@@ -31,11 +31,6 @@ namespace PetDelivey.WebAPI.Dal
             {
                 return "Error";
             }
-        }
-
-        public string AddProduto(Model.Produto produto)
-        {
-            throw new NotImplementedException();
         }
 
         public async void DeleteProduto(string id)
@@ -100,6 +95,7 @@ namespace PetDelivey.WebAPI.Dal
                 var erro = ex.Message;
                 throw;
             }
+
         }
 
         public async void UpdateProduto(Model.Produto produto)
@@ -113,8 +109,6 @@ namespace PetDelivey.WebAPI.Dal
             {
                 throw;
             }
-
         }
-
     }
 }
